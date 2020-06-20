@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../cgraphics/src/app/app.h"
+#include "vector.h"
+#include "normal.h"
+#include "point.h"
+#include "rgb_color.h"
+#include "geometric_object.h"
+#include "ray.h"
+#include "shade_rec.h"
+#include "view_plane.h"
+#include "world.h"
 
 static app_t *app;
 
