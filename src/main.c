@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../cgraphics/src/app/app.h"
-#include "vector.h"
-#include "normal.h"
-#include "point.h"
-#include "rgb_color.h"
-#include "geometric_object.h"
-#include "ray.h"
-#include "shade_rec.h"
-#include "view_plane.h"
-#include "world.h"
+#include "utilities/vector.h"
+#include "utilities/normal.h"
+#include "utilities/point.h"
+#include "utilities/rgb_color.h"
+#include "geometric_objects/geometric_object.h"
+#include "utilities/ray.h"
+#include "utilities/shade_rec.h"
+#include "utilities/view_plane.h"
+#include "worlds/world.h"
 
 static app_t *app;
 
@@ -19,6 +19,8 @@ static void update(int64_t elapsed_time)
 
 static void draw(void)
 {
+    app_clear_screen(app);
+    app_show_fps(app, 0, 0);
 }
 
 static void key_event(int key, int action)
@@ -44,8 +46,8 @@ static void finish(void)
 int main() {
     screen_settings_t *screen_settings = malloc(sizeof(screen_settings));
     screen_settings->window_title = "Ray Tracer";
-    screen_settings->width = 1024;
-    screen_settings->height = 768;
+    screen_settings->width = 300;
+    screen_settings->height = 300;
     screen_settings->targetFps = 60;
     screen_settings->show_stats = true;
     screen_settings->fullscreen = false;

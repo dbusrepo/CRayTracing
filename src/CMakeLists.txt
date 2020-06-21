@@ -1,9 +1,9 @@
 set(APP_EXE "CRayTracing")
 
-add_executable(${APP_EXE})
+add_executable(${APP_EXE} main.c geometric_objects/plane.c)
 
-file(GLOB SOURCES "*.c")
-file(GLOB HEADERS "*.h")
+file(GLOB SOURCES "*.c" "utilities/*.c" "geometric_objects/*.c")
+file(GLOB HEADERS "*.h" "utilities/*.h" "geometric_objects/*.h")
 
 target_sources(${APP_EXE}
         PRIVATE
@@ -28,10 +28,10 @@ target_link_libraries(${APP_EXE}
 #set(INSTALL_BINDIR ${CMAKE_INSTALL_BINDIR} CACHE PATH "Installation directory for executables")
 install(TARGETS ${APP_EXE} RUNTIME DESTINATION ${PROJECT_BINARY_DIR}/bin)
 
-foreach (SOURCE ${SOURCES})
-    get_filename_component(SOURCE_NAME "${SOURCE}" NAME)
-    add_custom_command(TARGET ${APP_EXE}
-            POST_BUILD
-            COMMAND make ARGS ${SOURCE_NAME}.s
-            )
-endforeach (SOURCE)
+#foreach (SOURCE ${SOURCES})
+#    get_filename_component(SOURCE_NAME "${SOURCE}" NAME)
+#    add_custom_command(TARGET ${APP_EXE}
+#            POST_BUILD
+#            COMMAND make ARGS ${SOURCE_NAME}.s       # fixare il path
+#            )
+#endforeach (SOURCE)

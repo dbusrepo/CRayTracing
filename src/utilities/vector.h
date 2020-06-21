@@ -1,6 +1,6 @@
 #pragma once
 #include <math.h>
-#include "assert.h"
+#include "../assert.h"
 #include "constants.h"
 #include "real.h"
 #include "vector3.r"

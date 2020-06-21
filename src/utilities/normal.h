@@ -1,6 +1,6 @@
 #pragma once
 #include "real.h"
-#include "assert.h"
+#include "../assert.h"
 #include "constants.h"
 
 struct normal

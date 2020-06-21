@@ -1,6 +1,6 @@
 #pragma once
-#include "view_plane.h"
-#include "rgb_color.h"
+#include "../utilities/view_plane.h"
+#include "../utilities/rgb_color.h"
 
 struct world
 {

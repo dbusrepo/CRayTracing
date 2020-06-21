@@ -2,7 +2,7 @@
 #include "normal.h"
 #include "point.h"
 #include "rgb_color.h"
-#include "world.h"
+#include "../worlds/world.h"
 #include <stdbool.h>
 
 struct shade_rec
