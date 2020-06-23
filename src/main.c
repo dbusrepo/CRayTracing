@@ -46,8 +46,8 @@ static void finish(void)
 int main() {
     screen_settings_t *screen_settings = malloc(sizeof(screen_settings));
     screen_settings->window_title = "Ray Tracer";
-    screen_settings->width = 300;
-    screen_settings->height = 300;
+    screen_settings->width = 1366;
+    screen_settings->height = 768;
     screen_settings->targetFps = 60;
     screen_settings->show_stats = true;
     screen_settings->fullscreen = false;
