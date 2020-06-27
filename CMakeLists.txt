@@ -90,3 +90,8 @@ add_subdirectory(cgraphics/src/screen_x11)
 add_subdirectory(cgraphics/src/app)
 add_subdirectory(src)
 
+add_custom_target(graphviz ALL
+        COMMAND ${CMAKE_COMMAND} "--graphviz=foo.dot" .
+        COMMAND dot -Tpng foo.dot -o foo.png
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+        )
