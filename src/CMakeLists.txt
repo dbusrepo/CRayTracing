@@ -1,9 +1,9 @@
 set(APP_EXE "CRayTracing")
 
-add_executable(${APP_EXE} main.c geometric_objects/plane.c)
+add_executable(${APP_EXE} main.c)
 
-file(GLOB SOURCES "*.c" "utilities/*.c" "geometric_objects/*.c")
-file(GLOB HEADERS "*.h" "utilities/*.h" "geometric_objects/*.h")
+file(GLOB SOURCES "*.c")
+file(GLOB HEADERS "*.h")
 
 target_sources(${APP_EXE}
         PRIVATE
