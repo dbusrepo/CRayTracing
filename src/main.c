@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../cgraphics/src/app/app.h"
+#include "../cgraphics/src/graphics_utils/common.h"
 #include "utilities/vector.h"
 #include "utilities/normal.h"
 #include "utilities/point.h"
@@ -59,4 +60,7 @@ int main() {
     cbs->finish = finish;
     cbs->print_final_stats = NULL;
     app_run(app, cbs);
+    vec3_t vec3;
+    vec3_init(&vec3, 1, 0, 0);
+    flush_printf("\n%f\n", vec3.x);
 }
