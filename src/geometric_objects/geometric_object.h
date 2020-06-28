@@ -8,7 +8,7 @@ typedef struct geometric_object geometric_object_t;
 
 struct geometric_object_vtable
 {
-	bool (*hit)(geometric_object_t *obj, ray_t *ray, float *t, shade_rec_t *sr);
+	bool (*hit)(geometric_object_t *obj, ray_t *ray, float *tmin, shade_rec_t *sr);
 };
 
 typedef struct geometric_object_vtable geometric_object_vtable_t;
@@ -20,8 +20,8 @@ struct geometric_object
 	rgb_color_t color;    // only used for Bare Bones ray tracing
 };
 
-inline bool geometric_object_hit(geometric_object_t *obj, ray_t *ray, float *t, shade_rec_t *sr) {
-    return obj->vtable->hit(obj, ray, t, sr);
+inline bool geometric_object_hit(geometric_object_t *obj, ray_t *ray, float *tmin, shade_rec_t *sr) {
+    return obj->vtable->hit(obj, ray, tmin, sr);
 }
 
 //inline rgb_color_t geometric_object_color() {

@@ -11,4 +11,4 @@ struct plane {
 
 typedef struct plane plane_t;
 
-void plane_init(plane_t *plane);
+void plane_init(plane_t *plane, point3_t *a, normal_t *n);

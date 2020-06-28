@@ -7,12 +7,19 @@
 #include "utilities/point.h"
 #include "utilities/rgb_color.h"
 #include "geometric_objects/geometric_object.h"
+#include "geometric_objects/plane.h"
+#include "geometric_objects/sphere.h"
 #include "utilities/ray.h"
 #include "utilities/shade_rec.h"
 #include "utilities/view_plane.h"
 #include "worlds/world.h"
 
 static app_t *app;
+
+static void init() {
+    plane_t p;
+    sphere_t s;
+}
 
 static void update(int64_t elapsed_time)
 {

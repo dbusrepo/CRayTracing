@@ -144,6 +144,13 @@ inline void vec3_scale(vec3_t *r, vec3_t *v, real k)
 	r->z = k * v->z;
 }
 
+inline void vec3_cscale(vec3_t *v, real k)
+{
+    v->x *= k;
+    v->y *= k;
+    v->z *= k;
+}
+
 inline void vec3_negate(vec3_t *r, vec3_t *v)
 {
 	r->x = -v->x;
@@ -156,7 +163,7 @@ inline real vec3_dot(vec3_t *a, vec3_t *b)
 	return a->x * b->x + a->y * b->y + a->z * b->z;
 }
 
-inline real vec3_len_squared(vec3_t *v)
+inline real vec3_len_sqr(vec3_t *v)
 {
 	return vec3_dot(v, v);
 }

@@ -22,6 +22,13 @@ inline void normal_init(normal_t *n, real nx, real ny, real nz)
 	n->z = nz;
 }
 
+inline void normal_init_vec3(normal_t *n, vec3_t *v)
+{
+    n->x = v->x;
+    n->y = v->y;
+    n->z = v->z;
+}
+
 inline void normal_copy(normal_t *t, normal_t *s)
 {
 	t->x = s->x;
