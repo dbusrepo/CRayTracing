@@ -1,6 +1,6 @@
 #pragma once
-#include "../worlds/world.h"
 
+typedef struct world world_t;
 typedef struct camera camera_t;
 
 struct camera_vtable {

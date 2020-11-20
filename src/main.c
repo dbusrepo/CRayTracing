@@ -17,8 +17,8 @@
 static app_t *app;
 
 static void init() {
-    plane_t p;
-    sphere_t s;
+//    plane_t p;
+//    sphere_t s;
 }
 
 static void update(int64_t elapsed_time)

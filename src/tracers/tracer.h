@@ -1,8 +1,8 @@
 #pragma once
 #include "../utilities/rgb_color.h"
 #include "../utilities/ray.h"
-#include "../worlds/world.h"
 
+typedef struct world world_t;
 typedef struct tracer tracer_t;
 
 struct tracer_vtable {
