@@ -80,3 +80,12 @@ build/
 # Idea project files
 out/
 .idea/
+/bin/
+
+#eclipse
+.settings/
+.csettings/
+.cproject
+.project
+
+

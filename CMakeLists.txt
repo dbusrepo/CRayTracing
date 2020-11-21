@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.17)
-project(CRayTracing C)
+project(Ray-Tracing-in-C C)
+
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(CMAKE_C_STANDARD 11)
+#set(CMAKE_C_STANDARD_REQUIRED ON)
+#set(CMAKE_C_EXTENSIONS OFF)
 
 message(STATUS "CMAKE_SYSTEM_NAME        = ${CMAKE_SYSTEM_NAME}")
 message(STATUS "CMAKE_VERSION            = ${CMAKE_VERSION}")
@@ -9,9 +13,9 @@ message(STATUS "CMAKE_C_COMPILER_ID      = ${CMAKE_C_COMPILER_ID}")
 message(STATUS "CMAKE_C_COMPILER_VERSION = ${CMAKE_C_COMPILER_VERSION}")
 
 #https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
-set(MY_GCC_OPTIONS -m64 -pedantic-errors -Wall -Wextra -Wshadow
+set(MY_GCC_OPTIONS -m64 -march=native -pedantic-errors -Wall -Wextra -Wshadow
         -Wundef -fno-common -Wconversion -Wcast-qual -Wwrite-strings -Wlogical-op
-        -Wfloat-equal -Wredundant-decls
+        -Wfloat-equal -Wredundant-decls -fmessage-length=0
         -Wcast-align -Wdisabled-optimization
         -Wno-unused-parameter -fverbose-asm -masm=intel) #-Wmissing-prototypes -Wstrict-prototypes
 
@@ -24,20 +28,20 @@ set(MY_ICC_OPTIONS -w3 -diag-disable:remark -Wall -Warray-bounds -Wchar-subscrip
 
 #-pedantic-errors
 
-
 #https://stackoverflow.com/questions/10046114/in-cmake-how-can-i-test-if-the-compiler-is-clang
 if (CMAKE_C_COMPILER_ID MATCHES GNU)
     # using GCC
-    message("using gcc " ${CMAKE_C_COMPILER_VERSION})
+    message("Hi ! I'm using gcc " ${CMAKE_C_COMPILER_VERSION})
     list(APPEND MY_OPTIONS ${MY_GCC_OPTIONS}) #${gcc_options}
-    list(APPEND MY_DEBUG_OPTIONS "-Og")
-    list(APPEND MY_RELEASE_OPTIONS "-O3" "-Wno-unused" "-fno-tree-vectorize") # -Wno-unused") #note: "-fno-tree-vectorize" disable vectorization
+    list(APPEND MY_DEBUG_OPTIONS "-Og" "-g3" "-fstack-protector-all" "-ggdb" "-fno-omit-frame-pointer" 
+    		"-fsanitize=undefined" "-fsanitize=shift" "-fsanitize=leak" "-fsanitize=address" "-fsanitize=pointer-compare" "-fsanitize=pointer-subtract")
+    list(APPEND MY_RELEASE_OPTIONS "-DNDEBUG" "-O3" "-mtune=native" "-Wno-unused" "-fno-tree-vectorize") # -Wno-unused") #note: "-fno-tree-vectorize" disable vectorization
 
 endif ()
 
 if (CMAKE_C_COMPILER_ID MATCHES Intel)
     # using GCC
-    message("using icc " ${CMAKE_C_COMPILER_VERSION})
+    #message("Using icc " ${CMAKE_C_COMPILER_VERSION})
     list(APPEND MY_OPTIONS ${MY_ICC_OPTIONS}) #${gcc_options}
     list(APPEND MY_DEBUG_OPTIONS "-Og") # "-Og"
     list(APPEND MY_RELEASE_OPTIONS "-O3" "-Wno-unused")
@@ -71,7 +75,7 @@ if (${PROJECT_SOURCE_DIR} STREQUAL ${PROJECT_BINARY_DIR})
     message(FATAL_ERROR "In-source builds not allowed. Please make a new directory")
 endif ()
 
-message("build type: " ${CMAKE_BUILD_TYPE})
+#message("Build type: " ${CMAKE_BUILD_TYPE})
 
 #https://stackoverflow.com/questions/25193239/cmake-directory-hierarchy-building-a-sub-directory-independently
 # -Dproject1=1 or the whole project with -DALL=1.
@@ -82,12 +86,14 @@ MACRO(ADD_PROJECT PROJECT)
 ENDMACRO()
 
 macro(PRINT_CUR_BINARY_DIR)
-    message("current binary dir is ${CMAKE_CURRENT_BINARY_DIR}")
+    message("Current binary dir is ${CMAKE_CURRENT_BINARY_DIR}")
 endmacro()
 
-add_subdirectory(cgraphics/src/graphics_utils)
-add_subdirectory(cgraphics/src/screen_x11)
-add_subdirectory(cgraphics/src/app)
+PRINT_CUR_BINARY_DIR()
+
+add_subdirectory(X11-C-Graphics/src/graphics_utils)
+add_subdirectory(X11-C-Graphics/src/screen_x11)
+add_subdirectory(X11-C-Graphics/src/app)
 add_subdirectory(src)
 
 add_custom_target(graphviz ALL
@@ -95,3 +101,9 @@ add_custom_target(graphviz ALL
         COMMAND dot -Tpng foo.dot -o foo.png
         WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
         )
+        
+# remember to add the link libraries for the main program (in the cmakelists under src/)
+#		"$<$<CONFIG:Debug>:asan>"
+#        "$<$<CONFIG:Debug>:ubsan>"
+# 
+        
